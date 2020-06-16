@@ -1,0 +1,29 @@
+server:
+  port: 8888
+#mysql
+spring:
+  mvc:
+    static-path-pattern: /statics/**
+  resources:
+    static-locations: classpath:/statics/
+  freemarker:
+    suffix: .html
+    request-context-attribute: request
+    template-loader-path: classpath:/templates/
+    cache: false
+    charset: UTF-8
+    settings:
+      default_encoding: utf-8
+      number_format: 0.##
+      date_format: yyyy-MM-dd
+      time_format: HH:mm:ss
+      datetime_format: yyyy-MM-dd HH:mm:ss
+      boolean_format: true,false
+  datasource:
+    url: jdbc:mysql://127.0.01:3306/model?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.allblue.model.modules.entity
