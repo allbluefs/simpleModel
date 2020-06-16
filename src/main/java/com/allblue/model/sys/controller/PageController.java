@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class PageController {
+
+    @RequestMapping("/")
+    public Object index() {
+        return "main";
+    }
     @RequestMapping("main.html")
     public String main() {
         return "main";
