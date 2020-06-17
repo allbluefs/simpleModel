@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				"value" : "#bfece3"//#ff97c6
 			},
 			"shape" : {
-				"type" : "polygon", //circle 圆圈 polygon 五边形 triangle 三角形 edge 正方形 star 星星
+				"type" : "circle", //circle 圆圈 polygon 五边形 triangle 三角形 edge 正方形 star 星星
 				"stroke" : {
 					"width" : 0,
 					"color" : "#362cff"

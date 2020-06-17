@@ -9,6 +9,7 @@ import com.allblue.model.sys.service.UserService;
 import com.allblue.model.utils.R;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  @Date:2020/6/16
  */
-@RestController
+@Controller
 public class LoginController {
     @Autowired
     private UserService userService;
@@ -51,8 +52,9 @@ public class LoginController {
      * @return
      */
     @RequestMapping("/loginOut")
-    public void login(HttpServletRequest request, HttpServletResponse response) {
+    public String login(HttpServletRequest request, HttpServletResponse response) {
         request.getSession().removeAttribute("user");
+        return "login";
     }
 
     /**

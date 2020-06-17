@@ -21,6 +21,7 @@
     <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700'
           rel='stylesheet' type='text/css'>
     <script type='text/javascript' src='/statics/login/scripts/particles.js'></script>
+    <script src="/statics/login/scripts/bganimation.js"></script>
     <!--<script type='text/javascript' src='scripts/jquery.particleground.js'></script>-->
     <script src="/statics/login/js/bootstrap.min.js"></script>
     <style>
@@ -78,76 +79,113 @@
         <div class="col-md-12">
             <div class="row login-plane animated fadeIn">
                 <div class="col-md-4 center-block">
-                    <form method="post" name="login" id="login" action=""
-                          onsubmit="">
+                    <form method="post" name="login" id="login" action="">
                         <strong>账号信息</strong>
                         <div class="form-group has-feedback">
-                            <input name="" type="text" id="userid" value=""
-                                   placeholder="userid" class="form-control" m="userid"
+                            <input name="" type="text" id="username" value=""
+                                   placeholder="username" class="form-control"
+                                   autocomplete="off"
+                                   onfocus="clearMsg1()"
                                    onkeyup="value=value.replace(/[\u4e00-\u9fa5]|(^\s+)|(\s+$)/ig,'')"
-                                   maxlength="12"/> <span class="form-control-feedback fui-user"></span>
+                                   maxlength="12"/> <span class="form-control-feedback fui-user"></span><span id="msg1" style="color: red"></span>
                         </div>
                         <div class="form-group has-feedback">
                             <input name="" type="password" value="" id="password"
-                                   placeholder="password" class="form-control" m="password"
+                                   placeholder="password" class="form-control"
+                                   autocomplete="off"
+                                   onfocus="clearMsg2()"
                                    onkeyup="this.value=this.value.replace(/(^\s+)|(\s+$)/g,'');"
-                                   maxlength="16"/> <span class="form-control-feedback fui-lock"></span>
+                                   maxlength="16"/> <span class="form-control-feedback fui-lock"></span><span id="msg2" style="color: red"></span>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <strong>角色信息</strong>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="radio" for="radio1"> <input type="radio"
-                                                                          name="optionsRadios1" value="student"
-                                                                          checked="checked"
-                                                                          id="radio1" data-toggle="radio"
-                                                                          class="custom-radio">
-                                    <span class="icons"> <span class="icon-unchecked"></span>
-											<span class="icon-checked"></span>
-									</span> <font style="vertical-align: inherit;"> <font
-                                            style="vertical-align: inherit;"> 学生 </font>
-                                    </font>
-                                </label>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="radio" for="radio2"> <input type="radio"
-                                                                          name="optionsRadios1" value="teacher"
-                                                                          id="radio2"
-                                                                          data-toggle="radio" class="custom-radio">
-                                    <span
-                                            class="icons"> <span class="icon-unchecked"></span> <span
-                                            class="icon-checked"></span>
-									</span> <font style="vertical-align: inherit;"> <font
-                                            style="vertical-align: inherit;"> 老师 </font>
-                                    </font>
-                                </label>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="radio" for="radio3"> <input type="radio"
-                                                                          name="optionsRadios1" value="admin"
-                                                                          id="radio3"
-                                                                          data-toggle="radio" class="custom-radio">
-                                    <span
-                                            class="icons"> <span class="icon-unchecked"></span> <span
-                                            class="icon-checked"></span>
-									</span> <font style="vertical-align: inherit;"> <font
-                                            style="vertical-align: inherit;"> 管理员 </font>
-                                    </font>
-                                </label>
-                            </div>
-                        </div>
+<!--                        <div class="row">-->
+<!--                            <div class="col-md-12">-->
+<!--                                <strong>角色信息</strong>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-4">-->
+<!--                                <label class="radio" for="radio1"> <input type="radio"-->
+<!--                                                                          name="optionsRadios1" value="student"-->
+<!--                                                                          checked="checked"-->
+<!--                                                                          id="radio1" data-toggle="radio"-->
+<!--                                                                          class="custom-radio">-->
+<!--                                    <span class="icons"> <span class="icon-unchecked"></span>-->
+<!--											<span class="icon-checked"></span>-->
+<!--									</span> <font style="vertical-align: inherit;"> <font-->
+<!--                                            style="vertical-align: inherit;"> 学生 </font>-->
+<!--                                    </font>-->
+<!--                                </label>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-4">-->
+<!--                                <label class="radio" for="radio2"> <input type="radio"-->
+<!--                                                                          name="optionsRadios1" value="teacher"-->
+<!--                                                                          id="radio2"-->
+<!--                                                                          data-toggle="radio" class="custom-radio">-->
+<!--                                    <span-->
+<!--                                            class="icons"> <span class="icon-unchecked"></span> <span-->
+<!--                                            class="icon-checked"></span>-->
+<!--									</span> <font style="vertical-align: inherit;"> <font-->
+<!--                                            style="vertical-align: inherit;"> 老师 </font>-->
+<!--                                    </font>-->
+<!--                                </label>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-4">-->
+<!--                                <label class="radio" for="radio3"> <input type="radio"-->
+<!--                                                                          name="optionsRadios1" value="admin"-->
+<!--                                                                          id="radio3"-->
+<!--                                                                          data-toggle="radio" class="custom-radio">-->
+<!--                                    <span-->
+<!--                                            class="icons"> <span class="icon-unchecked"></span> <span-->
+<!--                                            class="icon-checked"></span>-->
+<!--									</span> <font style="vertical-align: inherit;"> <font-->
+<!--                                            style="vertical-align: inherit;"> 管理员 </font>-->
+<!--                                    </font>-->
+<!--                                </label>-->
+<!--                            </div>-->
+<!--                        </div>-->
 
                         <input class="btn btn-primary btn-wide login-btn" value="LOGIN"
-                               type="submit"/>
+                               type="button" onclick="userLogin()"/>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<script src="/statics/login/scripts/bganimation.js"></script>
+<script>
+    function userLogin() {
+        let username=$("#username").val().trim();
+        let password=$("#password").val().trim();
+        if (username==null||username==''){
+            $("#msg1").html("用户名不能为空");
+            return;
+        }
+        if (password==null||password==''){
+            $("#msg2").html("密码不能为空");
+            return;
+        };
+        var obj=new Object();
+        obj.username=username;
+        obj.password=password;
+        $.ajax({
+            type: "POST",
+            url: "login",
+            data: obj,
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+            success: function (result) {
+                if (result.code == 0) {//登录成功
+                    location.href="index.html";
+                } else {
+                    alert(result.msg);
+                }
+            }
+        });
+    }
+    function clearMsg1() {
+        $("#msg1").html("");
+    }
+    function clearMsg2() {
+        $("#msg2").html("");
+    }
+</script>
 </body>
 </html>

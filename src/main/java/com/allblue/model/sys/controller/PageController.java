@@ -15,8 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PageController {
 
     @RequestMapping("/")
-    public Object index() {
+    public Object login() {
         return "login";
+    }
+    @RequestMapping("index.html")
+    public Object index() {
+        return "index";
     }
     @RequestMapping("main.html")
     public String main() {
