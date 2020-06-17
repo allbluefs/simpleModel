@@ -1,165 +1,146 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="pragma" content="no-cache">
-    <meta http-equiv="cache-control" content="no-cache">
-    <title>${APP_NAME}系统登陆</title>
-    <link rel="shortcut icon" href="${request.contextPath}/statics/images/favicon.png">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="shortcut icon" href="/statics/images/onepiece.jpg">
+    <meta charset="UTF-8">
+    <title>管理系统</title>
+
+    <script type="text/javascript" src="/statics/login/js/jquery-3.3.1.min.js"></script>
+
+    <!-- Loading Bootstrap -->
+    <link href="/statics/login/css/vendor/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Loading Flat UI Pro -->
+    <link href="/statics/login/css/flat-ui.css" rel="stylesheet">
+
+    <!-- Loading Flat UI Pro -->
+    <link href="/statics/login/css/animate.css" rel="stylesheet">
+
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700'
+          rel='stylesheet' type='text/css'>
+    <script type='text/javascript' src='/statics/login/scripts/particles.js'></script>
+    <!--<script type='text/javascript' src='scripts/jquery.particleground.js'></script>-->
+    <script src="/statics/login/js/bootstrap.min.js"></script>
+    <style>
+        .login-plane {
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .center-block {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .center-carousel {
+            width: 33%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .login-btn {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .container {
+            padding-top: 4rem;
+        }
+
+        body {
+            /*background: url(image/bj.jpg)*/
+
+        }
+    </style>
+
+    <link href="/statics/login/css/animate.css" rel="stylesheet">
 </head>
-<body>
+<body style="display: flex;">
 
-<link rel="stylesheet" type="text/css" href="${request.contextPath}/statics/css/login.css">
-<style type="text/css">
-    .btn_tab_login {
-        float: right;
-        margin-top: 48px;
-    }
 
-    .btn_tab_login li {
-        display: inline-block;
-        margin-left: 30px;
-        font-size: 14px;
-    }
-
-    .btn_tab_login li.cur a {
-        color: #d00;
-    }
-
-    .app_title {
-        position: fixed;
-        top: 20px;
-        left: 200px;
-    }
-
-    .app_name {
-        font-size: 24px;
-        color: #0C0C0C;
-        position: absolute;
-        width: 200px;
-        left: 50px;
-        top: 4px;
-    }
-
-    #weixin_login_container iframe {
-        width: 158px;
-        height: 158px;
-    }
-
-    .downApp {
-        background-image: url(${request.contextPath}/statics/images/app_icon.png);
-        width: 109px;
-        height: 32px;
-        border: 0px solid;
-        position: fixed;
-        right: 30px;
-        top: 25px;
-    }
-
-    .downApp label {
-        position: absolute;
-        left: 37px;
-        top: 4px;
-        color: yellow;
-        font-size: 16px;
-    }
-
-    #app_qrcode {
-        position: fixed;
-        right: 50px;
-        top: 70px;
-        width: 160px;
-
-    }
-</style>
-<div id="header">
-
+<div id="particles-js">
+    <canvas class="particles-js-canvas-el" width="1322" height="774"
+            style="width: 100%; height: 100%;">
+    </canvas>
 </div>
-<div class="downApp">
-    <label>下载APP</label>
-</div>
-<img style=" display: none;" id="app_qrcode" src="${request.contextPath}/statics/images/app_qrcode.jpg">
-<div class="app_title" style="color: #fff">
-    <img src="${request.contextPath}/statics/images/favicon.png" width="40px">
-    <b class="app_name">${APP_NAME}</b>
-</div>
-<div class="login-wrap">
-    <div class="wrap clearfix">
+<div class="container" id="particles"
+     style="position: relative; top: -4rem; margin: auto;">
+    <div class="row">
+        <div class="col-md-12">
+<!--             <h4 class="text-center animated bounceInDown">学生选课管理系统</h4> bounceInDown动画效果-->
+            <h4 class="text-center animated">管理系统</h4>
 
 
-        <div class="form-box fr loginV2" style="display:block;">
-            <ul class="form-tab clearfix">
-                <li class="tab-li" onclick="showQrcode()"><a href="javascript:;">扫码登陆<i
-                        class="icon"></i></a></li>
-                <li class="tab-li cur" onclick="showLogin()"><a href="javascript:;">账号登录</a></li>
-            </ul>
-            <div class="form-con">
-                <div class="weixin-login" style="display:none;">
-                    <div id="qr1">
-                        <div class="wx-box clearfix">
-                            <a href="javascript:;" class="wx-img-box">
-                                <div class="wx-qrCode" id="qrCodeImg">
-                                </div>
-                            </a>
+        </div>
+        <div class="col-md-12">
+            <div class="row login-plane animated fadeIn">
+                <div class="col-md-4 center-block">
+                    <form method="post" name="login" id="login" action=""
+                          onsubmit="">
+                        <strong>账号信息</strong>
+                        <div class="form-group has-feedback">
+                            <input name="" type="text" id="userid" value=""
+                                   placeholder="userid" class="form-control" m="userid"
+                                   onkeyup="value=value.replace(/[\u4e00-\u9fa5]|(^\s+)|(\s+$)/ig,'')"
+                                   maxlength="12"/> <span class="form-control-feedback fui-user"></span>
                         </div>
-                        <p class="wx-text">打开APP扫一扫 快速登录</p>
-                    </div>
-                    <div id="qr2" style="display: none">
-                        <div class="wx-box clearfix" style="border: 0px">
-                            <a href="javascript:;" class="wx-img-box" style="border: 0px">
-                                <img src="${request.contextPath}/statics/images/ok.png" style="width: 158px">
-                            </a>
+                        <div class="form-group has-feedback">
+                            <input name="" type="password" value="" id="password"
+                                   placeholder="password" class="form-control" m="password"
+                                   onkeyup="this.value=this.value.replace(/(^\s+)|(\s+$)/g,'');"
+                                   maxlength="16"/> <span class="form-control-feedback fui-lock"></span>
                         </div>
-                        <p class="wx-text">扫码成功<br>请在手机上「确认登录」</p>
-                    </div>
-                    <!--<p class="wx-help"><a href="javascript:;" class="help-a">如何使用？</a></p>-->
 
-
-                </div>
-                <div class="login-normal" style="display:block;">
-                    <form id="nameLoginForm" method="post" autocomplete="off" onsubmit="return nameLoginCheck();">
-                        <div class="form-error" style=""><i></i><label class="text"></label></div>
-                        <dl class="clearfix">
-                            <dt>账户名：</dt>
-                            <dd>
-                                <input type="text" name="loginName" id="normalUser" class="input-text"
-                                       placeholder="用户名/邮箱/手机号" autofocus/>
-                            </dd>
-                        </dl>
-                        <dl class="top1 clearfix">
-                            <dt>密<em></em>码：</dt>
-                            <dd><input type="password" name="password" id="normalPassword" class="input-text"
-                                       placeholder="请输入密码"/>
-                        </dl>
-                        <dl class="top1 clearfix">
-                            <dt>验证码：</dt>
-                            <dd>
-                                <input name="smsCaptcha" type="text" id="captchaInput" class="input-yzm" maxlength="5"
-                                       autocomplete="off" placeholder="请填写">
-                                <span class="span-yzm">
-									<img id="captcha" src="${request.contextPath}/captcha.jpg" title="点击图片刷新校验码"
-                                         alt="点击图片刷新校验码"
-                                         onclick="refreshCode()">
-									<a href="javascript:refreshCode();"
-                                       class="forget-pass">换一张</a>
-								</span>
-                            </dd>
-                        </dl>
-                        <div class="form-remember">
-
-                            <label class="rem-box rem-box-r memCheck"><input name="rememberMe" type="checkbox"
-                                                                             checked="checked"
-
-                                                                             class="rem-check">记住我</label>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <strong>角色信息</strong>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="radio" for="radio1"> <input type="radio"
+                                                                          name="optionsRadios1" value="student"
+                                                                          checked="checked"
+                                                                          id="radio1" data-toggle="radio"
+                                                                          class="custom-radio">
+                                    <span class="icons"> <span class="icon-unchecked"></span>
+											<span class="icon-checked"></span>
+									</span> <font style="vertical-align: inherit;"> <font
+                                            style="vertical-align: inherit;"> 学生 </font>
+                                    </font>
+                                </label>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="radio" for="radio2"> <input type="radio"
+                                                                          name="optionsRadios1" value="teacher"
+                                                                          id="radio2"
+                                                                          data-toggle="radio" class="custom-radio">
+                                    <span
+                                            class="icons"> <span class="icon-unchecked"></span> <span
+                                            class="icon-checked"></span>
+									</span> <font style="vertical-align: inherit;"> <font
+                                            style="vertical-align: inherit;"> 老师 </font>
+                                    </font>
+                                </label>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="radio" for="radio3"> <input type="radio"
+                                                                          name="optionsRadios1" value="admin"
+                                                                          id="radio3"
+                                                                          data-toggle="radio" class="custom-radio">
+                                    <span
+                                            class="icons"> <span class="icon-unchecked"></span> <span
+                                            class="icon-checked"></span>
+									</span> <font style="vertical-align: inherit;"> <font
+                                            style="vertical-align: inherit;"> 管理员 </font>
+                                    </font>
+                                </label>
+                            </div>
                         </div>
-                        <div class="btn-box clearfix">
-                            <input id="normalSubmit" class="btn-settlement" type="button" value="登    录"
-                                   onclick="longin()">
 
-                        </div>
-                        <div class="link-box clearfix">
-                            <!--<a href="javascript:;" class="register" tjjj="passport.login.fstreg">新用户注册</a>-->
-                            <!--<a href="javascript:;" class="forget-pass" tjjj="passport.forget.password">忘记密码？</a>-->
-                        </div>
+                        <input class="btn btn-primary btn-wide login-btn" value="LOGIN"
+                               type="submit"/>
                     </form>
                 </div>
             </div>
@@ -167,277 +148,6 @@
     </div>
 </div>
 
-<div id="jia_footer">
-    <div class="jia_foot_info">
-        <div class="jia_foot_con">
-            <p class="jia_foot_link">
-                <a href="http://www.bjcw.cn/" rel="nofollow" target="_blank">关于我们</a><span class="jia_split">|</span>
-                <a href="http://www.bjcw.cn/zjzw/jtjj/" target="_blank" rel="nofollow">走进兆维</a><span
-                    class="jia_split">|</span>
-                <a href="http://www.bjcw.cn/cypt/yqjj/" target="_blank" rel="nofollow">产品平台</a><span
-                    class="jia_split">|</span>
-                <a href="http://www.bjcw.cn/zzcx/yftx/" target="_blank" rel="nofollow">自主创新</a><span
-                    class="jia_split">|</span>
-                <a href="http://www.bjcw.cn/rlzy/rczl/" target="_blank" rel="nofollow">人力资源</a><span
-                    class="jia_split">|</span>
-                <a href="http://www.bjcw.cn/qywh/qyjs/" target="_blank" rel="nofollow">企业文化</a><span
-                    class="jia_split">|</span>
-                <a
-                        href="javascript:;" class="jia_foot_open">友情链接<i></i></a>
-            </p>
-            <p class="jia_foot_link footnone">
-                <a href="http://cwcb.com.cn/" target="_blank" tjjj="footer.bottom.1">兆维通信</a><span
-                    class="jia_split">|</span>
-                <a href="http://cwsemc.bjcw.cn/" target="_blank" tjjj="footer.bottom.1">兆维交换</a><span class="jia_split">|</span>
-                <a href="http://www.cwpark.cn/" target="_blank" tjjj="footer.bottom.1">兆维实业</a><span
-                    class="jia_split">|</span>
-                <a href="http://www.bjcwtd.com/" target="_blank" tjjj="footer.bottom.1">兆维智能装备</a><span
-                    class="jia_split">|</span>
-            </p>
-        </div>
-        <p>
-            版权所有 © 2017 北京兆维电子（集团）有限责任公司　　京ICP备17002761
-        </p>
-    </div>
-</div>
-<script src="${request.contextPath}/statics/libs/jquery.min.js"></script>
-<script src="${request.contextPath}/statics/libs/vue.min.js"></script>
-<script src="${request.contextPath}/statics/libs/utf.js"></script>
-<script src="${request.contextPath}/statics/libs/jquery.qrcode.js"></script>
-<script type="text/javascript">
-    $(".rem-check").change(function () {
-        if ($('.rem-check').prop('checked')) {
-            $(".rem-box").addClass("memCheck")
-        } else {
-            $(".rem-box").removeClass("memCheck")
-        }
-    })
-
-    function refreshCode() {
-        $("#captcha").attr("src", "captcha.jpg?t=" + $.now());
-    }
-
-    function nameLoginCheck() {
-        var loginName = $("#nameLoginForm").find("#normalUser").eq(0).val();
-        var password = $("#nameLoginForm").find("#normalPassword").eq(0).val();
-        if ($(".tips ").is(":visible")) {
-            return false;
-        }
-        if (loginName == null || loginName == "") {
-            showError("请输入用户名");
-            return false;
-        }
-        if (password == null || password == "") {
-            showError("请输入密码");
-            return false;
-        }
-        if ($("#normalYzm") && $("#nameLoginForm").find("#normalYzm").length > 0) {
-            if ($("#normalYzm").val() == "" || $("#normalYzm").val() == null) {
-                showError("请输入验证码");
-                return false;
-            }
-        }
-        return true;
-    }
-
-    function mobileCheck(obj) {
-        if (!(_mobile_reg).test($("#partnerPhone").val())) {
-            showError("请填写正确的手机号");
-            return;
-        } else {
-            closeError();
-        }
-    }
-
-    //发送短信
-    function sendSms(obj) {
-        alert("信息已发送  www.dmaku.com - 代码库");
-    }
-
-    function captchCheck(obj) {
-        var captch = $(obj).val();
-        if (captch == '' || captch == null) {
-            showError("请填写验证码");
-        } else {
-            checkCaptch(captch,
-                function () {
-                    if (!$("#smsSendButton").hasClass("sending")) {
-                        $("#smsSendButton").removeClass("disabled");
-                    }
-                    closeError();
-                }, function () {
-                    showError("验证码错误");
-                    $("#smsSendButton").addClass("disabled");
-                }
-            );
-        }
-    }
-
-    var qrcode = "";
-    var startQRCode = false;
-
-    function showLogin() {
-        startQRCode = false;
-    }
-
-    function showQrcode() {
-        startQRCode = true;
-        if (qrcode == "") {
-            $.ajax({
-                type: "POST",
-                url: "/sys/login/qrcode",
-                dataType: "json",
-                success: function (result) {
-                    if (result.code == 0) {
-                        qrcode = result.qrcode;
-                        $("#qrCodeImg").empty();
-                        $("#qrCodeImg").qrcode({
-                            render: "canvas", //设置渲染方式，有table和canvas，使用canvas方式渲染性能相对来说比较好
-                            text: qrcode, //扫描二维码后显示的内容,可以直接填一个网址，扫描二维码后自动跳向该链接
-                            width: "158", //二维码的宽度
-                            height: "158", //二维码的高度
-                            background: "#ffffff", //二维码的后景色
-                            foreground: "#000000", //二维码的前景色
-                            src: '/statics/images/timg.jpg' //二维码中间的图片
-                        });
-                        qrcodeValid();
-                    } else {
-                        showQrcode();
-                    }
-                }
-            });
-        }
-    }
-
-    function qrcodeValid() {
-        $.ajax({
-            type: "POST",
-            url: "/sys/login/qrcode/valid?code=" + qrcode.split(":")[1],
-            dataType: "json",
-            success: function (result) {
-                console.log(result)
-                if (result.code == 2) {
-                    //登陆成功
-                    parent.location.href = 'index.html';
-                } else if (result.code == 1) {
-                    //已扫描
-                    $("#qr1").hide();
-                    $("#qr2").show();
-                    if (startQRCode) {
-                        setTimeout(function () {
-                            qrcodeValid();
-                        }, 1000)
-                    }
-                } else if (result.code == 3) {
-                    //二维码过期
-                    qrcode = "";
-                    showQrcode();
-                    $("#qr1").show();
-                    $("#qr2").hide();
-                } else if (startQRCode) {
-                    setTimeout(function () {
-                        qrcodeValid();
-                    }, 2000)
-                }
-            }
-        });
-    }
-
-    function longin() {
-        if (!nameLoginCheck()) {
-            return;
-        }
-//        var data = "username=" + $("#normalUser").val() + "&password=" + $("#normalPassword").val() + "&captcha=" + $("#captchaInput").val() + "&rememberMe=" + $('.rem-check').prop('checked');
-        var data = new Object();
-        data.username= $("#normalUser").val();
-        data.password=$("#normalPassword").val();
-        data.captcha = $("#captchaInput").val();
-        data.channel=1;
-        data.deviceName="网页";
-        data.deviceNo="aaabbbcccddd";
-        $.ajax({
-            type: "POST",
-            url: "sys/login",
-            data: JSON.stringify(data),
-            contentType: "application/json",
-            success: function (result) {
-                if (result.code == 0) {//登录成功
-                    localStorage.setItem("token",result.token)
-                    parent.location.href = 'index.html';
-                } else {
-                    refreshCode();
-                    showError(result.msg);
-                }
-            }
-        });
-    }
-
-    $(function () {
-
-        $(".downApp").mouseover(function () {
-            $("#app_qrcode").show();
-
-        });
-
-        $(".downApp").mouseout(function () {
-            $("#app_qrcode").hide();
-        });
-
-        $(".form-tab li").on("click", function () {
-            var index = $(this).index();
-            $(this).addClass("cur").siblings().removeClass("cur");
-            $(".form-con>div").hide().eq(index).show();
-            if (index == 0) {
-                $(".form-foot").hide();
-            } else {
-                $(".form-foot").show();
-                //www.dmaku.com 代码库
-            }
-            $(".form-error").hide();
-        });
-        $(".weixin-login .help-a").hover(
-            function () {
-                $(".wx-img-box,.wx-image").stop();
-                $(this).parents(".weixin-login").find(".wx-img-box").animate({"marginLeft": "15px"}, 300, function () {
-                    $(this).parents(".weixin-login").find(".wx-image").animate({"opacity": 1}, 300);
-                });
-            },
-            function () {
-                $(".wx-img-box,.wx-image").stop();
-                $(this).parents(".weixin-login").find(".wx-image").stop().animate({"opacity": 0}, 300, function () {
-                    $(this).parents(".weixin-login").find(".wx-img-box").animate({"marginLeft": "110px"}, 300);
-                });
-            }
-        );
-        $("body").keydown(function () {
-            if (event.keyCode == "13") {//keyCode=13是回车键
-                $('#normalSubmit').click();
-            }
-        });
-
-    });
-
-    $('.jia_foot_open').click(function () {
-        $('.footnone').slideToggle();
-        $(this).find('i').toggleClass('footnow');
-    });
-    $('.phoneLogin').click(function () {
-        $('.loginV2').hide();
-        $('.shortLogin').show();
-        $('.form-error').hide();
-    });
-    $('.backLogin').click(function () {
-        $('.login-normal').show();
-        $('.loginV2').show();
-        $('.shortLogin').hide();
-        $('.form-error').hide();
-    });
-
-    //开启错误提示
-    function showError(error) {
-        $(".form-error").find("label").html(error);
-        $(".form-error").show();
-    }
-</script>
+<script src="/statics/login/scripts/bganimation.js"></script>
 </body>
 </html>
