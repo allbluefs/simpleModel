@@ -9,6 +9,7 @@ import com.allblue.model.utils.R;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
@@ -36,6 +37,15 @@ public class HotelController {
         Page<Hotel> page = hotelService.selectPage(new Query<Hotel>(params).getPage(), new EntityWrapper<Hotel>());
         PageUtils pageUtils = new PageUtils(page);
         return R.ok().put("page",pageUtils);
+    }
+    /**
+     * 保存
+     */
+    @RequestMapping("/save")
+    @ResponseBody
+    public R save(@RequestBody Hotel hotel){
+        hotelService.insert(hotel);
+        return R.ok();
     }
 
 }

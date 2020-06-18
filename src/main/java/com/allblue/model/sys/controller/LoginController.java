@@ -27,7 +27,6 @@ public class LoginController {
     @RequestMapping("/login")
     @ResponseBody
     public R login(UserEntity user, HttpServletRequest request) {
-        try {
             UserEntity u = null;
             u = userService.selectOne(new EntityWrapper<UserEntity>().eq("username", user.getUsername()));
             if (null == u) {
@@ -40,10 +39,7 @@ public class LoginController {
             // 登录成功，将用户信息保存在session
             request.getSession().setAttribute("user", u);
             return R.ok("登录成功");
-        } catch (Exception e) {
-            System.out.println("==================查询用户信息异常==================");
-            return R.error("查询用户信息异常");
-        }
+
     }
     /**
      * 退出登陆

@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2020-06-16 09:04:34
  */
 @RestController
-@RequestMapping("user")
+@RequestMapping("sys/user")
 public class UserController {
     @Autowired
     private UserService userService;

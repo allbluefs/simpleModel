@@ -20,7 +20,7 @@ public class Hotel extends Model<Hotel> {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id", type = IdType.AUTO)
+    @TableId
     private Long id;
     /**
      * 酒店名称

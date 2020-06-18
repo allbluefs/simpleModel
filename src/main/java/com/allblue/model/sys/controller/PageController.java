@@ -30,4 +30,8 @@ public class PageController {
     public String module( @PathVariable("url") String url) {
         return "modules/"+ url;
     }
+    @RequestMapping("modules/{module}/{url}.html")
+    public String module2(@PathVariable("module") String module, @PathVariable("url") String url) {
+        return "modules/" + module + "/" + url;
+    }
 }

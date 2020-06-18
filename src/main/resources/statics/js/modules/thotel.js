@@ -125,13 +125,13 @@ var vm = new Vue({
 		},
 		saveOrUpdate: function (event) {
 			vm.isDisable = true;
-		    var bootstrapValidator = $("#myForm").data('bootstrapValidator');
-            bootstrapValidator.validate();
-            if (!bootstrapValidator.isValid()) {
-				vm.isDisable = false;
-                return;
-            }
-			var url = vm.tHotel.id == null ? "dev/thotel/save" : "dev/thotel/update";
+		    // var bootstrapValidator = $("#myForm").data('bootstrapValidator');
+            // bootstrapValidator.validate();
+            // if (!bootstrapValidator.isValid()) {
+			// 	vm.isDisable = false;
+            //     return;
+            // }
+			var url = vm.tHotel.id == null ? "hotel/save" : "hotel/update";
 			$.ajax({
 				type: "POST",
 			    url: baseURL + url,

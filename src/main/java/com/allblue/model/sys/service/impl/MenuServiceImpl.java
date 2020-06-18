@@ -4,14 +4,11 @@ import com.allblue.model.sys.dao.MenuDao;
 import com.allblue.model.sys.entity.MenuEntity;
 import com.allblue.model.sys.service.MenuService;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 
 @Service("menuService")
@@ -47,7 +44,10 @@ public class MenuServiceImpl extends ServiceImpl<MenuDao, MenuEntity> implements
         }
         return childs;
     }
-
+    @Override
+    public List<MenuEntity> queryListParentId(Long parentId) {
+        return baseMapper.queryListParentId(parentId);
+    }
 
 
 }

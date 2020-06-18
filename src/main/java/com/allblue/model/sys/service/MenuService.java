@@ -4,7 +4,6 @@ import com.allblue.model.sys.entity.MenuEntity;
 import com.baomidou.mybatisplus.service.IService;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * 菜单管理
@@ -13,7 +12,11 @@ public interface MenuService extends IService<MenuEntity> {
 
 
     List<MenuEntity> getUserMenuTree();
-
+    /**
+     * 根据父菜单，查询子菜单
+     * @param parentId 父菜单ID
+     */
+    List<MenuEntity> queryListParentId(Long parentId);
 
 }
 
