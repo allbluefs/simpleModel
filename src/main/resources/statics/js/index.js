@@ -55,8 +55,9 @@ var vm = new Vue({
             });
         },
         getUser: function () {
-            $.getJSON("sys/user/info?_" + $.now(), function (r) {
-                vm.user = r.user;
+            $.getJSON("getLoginUserInfo", function (r) {
+                vm.user = r;
+                console.log(vm.user.username)
             });
         },
         myCalendar: function () {
