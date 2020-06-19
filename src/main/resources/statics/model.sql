@@ -34,37 +34,72 @@ CREATE TABLE `sys_menu` (
 
 /*Data for the table `sys_menu` */
 
-insert  into `sys_menu`(`menu_id`,`parent_Id`,`name`,`url`,`perms`,`type`,`icon`,`order_num`) values (1,0,'系统管理','',NULL,0,'fa fa-cog',0),(2,1,'菜单管理','modules/sys/menu.html','',1,'fa fa-th-list',2),(3,1,'用户管理','modules/sys/user.html',NULL,1,'fa fa-user',1);
+insert  into `sys_menu`(`menu_id`,`parent_Id`,`name`,`url`,`perms`,`type`,`icon`,`order_num`) values (1,0,'系统管理','',NULL,0,'fa fa-cog',0),(2,1,'菜单管理','modules/sys/menu.html','',1,'fa fa-th-list',2),(3,1,'用户管理','modules/sys/user.html',NULL,1,'fa fa-user',1),(4,1,'角色管理','modules/sys/role.html',NULL,1,'fa fa-user-secret',3);
+
+/*Table structure for table `sys_role` */
+
+DROP TABLE IF EXISTS `sys_role`;
+
+CREATE TABLE `sys_role` (
+  `role_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `role_name` varchar(100) DEFAULT NULL COMMENT '角色名称',
+  `remark` varchar(100) DEFAULT NULL COMMENT '备注',
+  `dept_id` bigint(20) DEFAULT NULL,
+  `create_time` date DEFAULT NULL,
+  PRIMARY KEY (`role_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+/*Data for the table `sys_role` */
+
+insert  into `sys_role`(`role_id`,`role_name`,`remark`,`dept_id`,`create_time`) values (1,'管理员','普通',NULL,'2020-06-19'),(2,'普通用户','吸血',NULL,'2020-06-19');
+
+/*Table structure for table `sys_role_menu` */
+
+DROP TABLE IF EXISTS `sys_role_menu`;
+
+CREATE TABLE `sys_role_menu` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `role_id` bigint(20) DEFAULT NULL COMMENT '角色id',
+  `menu_id` bigint(20) DEFAULT NULL COMMENT '菜单id',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+
+/*Data for the table `sys_role_menu` */
+
+insert  into `sys_role_menu`(`id`,`role_id`,`menu_id`) values (8,1,0),(9,1,1),(10,1,2),(11,1,3),(12,1,4),(13,2,0),(14,2,1),(15,2,4);
 
 /*Table structure for table `sys_user` */
 
 DROP TABLE IF EXISTS `sys_user`;
 
 CREATE TABLE `sys_user` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `user_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `username` varchar(50) DEFAULT NULL COMMENT '账户',
   `password` varchar(50) DEFAULT NULL COMMENT '密码',
   `user_type` tinyint(1) DEFAULT NULL COMMENT '用户类型（1普通用户 3管理员）',
   `chinese_name` varchar(20) DEFAULT NULL COMMENT '用户姓名',
-  PRIMARY KEY (`id`) USING BTREE
+  `status` int(1) DEFAULT NULL COMMENT '1.激活',
+  PRIMARY KEY (`user_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `sys_user` */
 
-insert  into `sys_user`(`id`,`username`,`password`,`user_type`,`chinese_name`) values (7,'admin','admin',3,'管理员'),(34,'lufei','123',1,'路飞'),(35,'Robin','123',2,'罗宾');
+insert  into `sys_user`(`user_id`,`username`,`password`,`user_type`,`chinese_name`,`status`) values (1,'admin','admin',0,'管理员',1),(2,'Robin','123',1,'罗宾',1),(3,'lufei','123',1,'路飞',1);
 
-/*Table structure for table `sys_user_menu` */
+/*Table structure for table `sys_user_role` */
 
-DROP TABLE IF EXISTS `sys_user_menu`;
+DROP TABLE IF EXISTS `sys_user_role`;
 
-CREATE TABLE `sys_user_menu` (
+CREATE TABLE `sys_user_role` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) NOT NULL,
-  `menu_id` bigint(20) NOT NULL,
+  `role_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
-/*Data for the table `sys_user_menu` */
+/*Data for the table `sys_user_role` */
+
+insert  into `sys_user_role`(`id`,`user_id`,`role_id`) values (1,1,1),(6,2,2),(7,3,2);
 
 /*Table structure for table `t_hotel` */
 

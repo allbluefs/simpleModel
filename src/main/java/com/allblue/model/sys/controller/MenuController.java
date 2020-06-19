@@ -1,7 +1,9 @@
 package com.allblue.model.sys.controller;
 
 import com.allblue.model.sys.entity.MenuEntity;
+import com.allblue.model.sys.entity.UserEntity;
 import com.allblue.model.sys.service.MenuService;
+import com.allblue.model.utils.ContextHolderUtils;
 import com.allblue.model.utils.R;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,8 @@ public class MenuController{
 
     @RequestMapping("/nav")
     public R nav() {
-        List<MenuEntity> menuList = menuService.getUserMenuTree();
+        UserEntity user = ContextHolderUtils.getUser();
+        List<MenuEntity> menuList = menuService.getUserMenuTree(user.getUserId());
         return R.ok().put("menuList", menuList);
     }
 

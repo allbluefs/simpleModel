@@ -5,12 +5,36 @@
 
 	<!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.allblue.model.sys.entity.UserEntity" id="tUserMap">
-        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
         <result property="username" column="username"/>
         <result property="password" column="password"/>
         <result property="userType" column="user_type"/>
         <result property="chineseName" column="chinese_name"/>
+        <result property="status" column="status"/>
+        <association property="roleId" javaType="String" column="user_id" select="selectRoleId"/>
+        <association property="roleName" javaType="String" column="user_id" select="selectRoleName"/>
     </resultMap>
+    <!-- 查询用户的所有菜单ID -->
+    <select id="queryAllMenuId" resultType="java.lang.Long">
+        select distinct rm.menu_id
+        from sys_user_role ur
+                 LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id
+        where ur.user_id = #{userId}
+    </select>
+    <!--查询角色ID-->
+    <select id="selectRoleId" resultType="java.lang.Long">
+        select r.role_id
+        from sys_user_role ur
+                 LEFT JOIN sys_role r ON ur.role_id = r.role_id
+        where ur.user_id = #{user_id}
+    </select>
 
+    <!--查询角色名称-->
+    <select id="selectRoleName" resultType="java.lang.String">
+        select r.role_name
+        from sys_user_role ur
+                 LEFT JOIN sys_role r ON ur.role_id = r.role_id
+        where ur.user_id = #{user_id}
+    </select>
 
 </mapper>

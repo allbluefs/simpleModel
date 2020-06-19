@@ -3,15 +3,15 @@ package com.allblue.model.sys.service.impl;
 import com.allblue.model.sys.dao.MenuDao;
 import com.allblue.model.sys.entity.MenuEntity;
 import com.allblue.model.sys.entity.UserEntity;
-import com.allblue.model.sys.entity.UserMenuEntity;
 import com.allblue.model.sys.service.MenuService;
-import com.allblue.model.sys.service.UserMenuService;
+import com.allblue.model.sys.service.UserService;
 import com.allblue.model.utils.ContextHolderUtils;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,21 +20,21 @@ import java.util.stream.Collectors;
 @Service("menuService")
 public class MenuServiceImpl extends ServiceImpl<MenuDao, MenuEntity> implements MenuService {
 
+    //    @Autowired
+//    private UserMenuService userMenuService;
     @Autowired
-    private UserMenuService userMenuService;
+    private UserService userService;
 
     @Override
-    public List<MenuEntity> getUserMenuTree() {
-        UserEntity user = ContextHolderUtils.getUser();
-        List<UserMenuEntity> userMenuList = userMenuService.selectList(new EntityWrapper<UserMenuEntity>()
-                .eq("user_id", user.getId()));
-        EntityWrapper<MenuEntity> ew = new EntityWrapper<>();
-        List<MenuEntity> list=new ArrayList<>();
-        if (CollectionUtils.isNotEmpty(userMenuList)) {
-            List<Long> menuIds = userMenuList.stream().map(UserMenuEntity::getMenuId).collect(Collectors.toList());
-            ew.in("menu_id",menuIds);
-            ew.orderBy("order_num");
-            list = this.selectList(ew);
+    public List<MenuEntity> getUserMenuTree(Long userId) {
+        List<MenuEntity> list = new ArrayList<>();
+        //系统管理员，拥有最高权限
+        if (userId == 1) {
+            list = this.selectList(new EntityWrapper<MenuEntity>().orderBy("order_num"));
+        } else {
+            //用户菜单列表
+            List<Long> menuIdList = userService.queryAllMenuId(userId);
+            list = this.selectList(new EntityWrapper<MenuEntity>().in("menu_id", menuIdList).orderBy("order_num"));
         }
         return getChildList(0L, list);
     }
@@ -61,6 +61,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuDao, MenuEntity> implements
         }
         return childs;
     }
+
     @Override
     public List<MenuEntity> queryListParentId(Long parentId) {
         return baseMapper.queryListParentId(parentId);

@@ -11,7 +11,7 @@ import java.util.List;
 public interface MenuService extends IService<MenuEntity> {
 
 
-    List<MenuEntity> getUserMenuTree();
+    List<MenuEntity> getUserMenuTree(Long userId);
     /**
      * 根据父菜单，查询子菜单
      * @param parentId 父菜单ID

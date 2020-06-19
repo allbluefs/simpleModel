@@ -1,16 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
-    <title></title>
-		<#include "/header.html">
+    <title>系统用户</title>
+    <#include "/header.html">
+    <style>
+        .change-profile{
+            position: relative;
+            width: 80px;
+            height: 21px;
+            background-color: rgba(0, 0, 0, 0.47);
+            margin: auto;
+            z-index: 1014;
+            margin-top: -21px;
+            color: #ffffff;
+        }
+    </style>
 </head>
 <body>
-<div id="rrapp" v-cloak>
+<div id="cwapp" v-cloak>
     <div v-show="showList">
         <div class="grid-btn">
-            <a class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
-            <a class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
-            <a class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+            <div class="form-group col-sm-2">
+                <input type="text" class="form-control" v-model.trim="q.username" @keyup.enter="query" placeholder="用户名">
+            </div>
+            <a class="btn btn-default" @click="query">查询</a>
+                <a class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+                <a class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+                <a class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
         </div>
         <table id="jqGrid"></table>
         <div id="jqGridPager"></div>
@@ -18,32 +34,69 @@
 
     <div v-show="!showList" class="panel panel-default">
         <div class="panel-heading">{{title}}</div>
-        <form class="form-horizontal" id="myForm" autocomplete="off">
-														                    <div class="form-group">
-                        <div class="col-sm-2 control-label">账户</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model.trim="sysUser.username" placeholder="账户" name="username"/>
-                        </div>
-                    </div>
-											                    <div class="form-group">
-                        <div class="col-sm-2 control-label">密码</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model.trim="sysUser.password" placeholder="密码" name="password"/>
-                        </div>
-                    </div>
-											                    <div class="form-group">
-                        <div class="col-sm-2 control-label">用户类型（1普通用户 3管理员）</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model.trim="sysUser.userType" placeholder="用户类型（1普通用户 3管理员）" name="userType"/>
-                        </div>
-                    </div>
-											                    <div class="form-group">
-                        <div class="col-sm-2 control-label">用户姓名</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model.trim="sysUser.chineseName" placeholder="用户姓名" name="chineseName"/>
-                        </div>
-                    </div>
-							            <div class="form-group">
+        <form class="form-horizontal" id="newForm" autocomplete="off">
+<!--            <div class="form-group">-->
+<!--                <div class="col-sm-2 control-label">头像</div>-->
+<!--                <div class="col-sm-10" style="text-align: center">-->
+<!--                    <img :src="user.photo" style="width: 80px;height: 80px;border-radius: 50%" class="profile-img" >-->
+<!--                    <div class="change-profile" style="display: none">点击更换</div>-->
+<!--                    <input id="profile" type="file" class="form-control"  placeholder="头像" name="profile" style="display: none"/>-->
+<!--                </div>-->
+<!--            </div>-->
+            <div class="form-group">
+                <div class="col-sm-2 control-label">用户名</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model.trim="user.username" placeholder="用户名" name="username" maxlength="50"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">中文名</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model.trim="user.chineseName" placeholder="中文名" name="chineseName" maxlength="50"/>
+                </div>
+            </div>
+<!--            <div class="form-group">-->
+<!--                <div class="col-sm-2 control-label">所属机构</div>-->
+<!--                <div class="col-sm-10">-->
+<!--                    <input type="text" class="form-control" style="cursor:pointer;" v-model.trim="user.deptName" @click="deptTree" readonly="readonly" placeholder="所属机构" name="deptName"/>-->
+<!--                </div>-->
+<!--            </div>-->
+            <div class="form-group">
+                <div class="col-sm-2 control-label">密码</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model.trim="user.password" placeholder="密码" name="password" maxlength="100"/>
+                </div>
+            </div>
+<!--            <div class="form-group">-->
+<!--                <div class="col-sm-2 control-label">邮箱</div>-->
+<!--                <div class="col-sm-10">-->
+<!--                    <input type="text" class="form-control" v-model.trim="user.email" placeholder="邮箱" name="email"/>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <div class="col-sm-2 control-label">手机号</div>-->
+<!--                <div class="col-sm-10">-->
+<!--                    <input type="text" class="form-control" v-model.trim="user.mobile" placeholder="手机号" name="mobile"/>-->
+<!--                </div>-->
+<!--            </div>-->
+            <div class="form-group">
+                <div class="col-sm-2 control-label">角色</div>
+                <div class="col-sm-10">
+                    <label v-for="role in roleList" class="checkbox-inline">
+                        <input type="radio" :value="role.roleId" v-model.trim="user.roleId" name="chRoles">{{role.roleName}}
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">状态</div>
+                <label class="radio-inline">
+                    <input type="radio" name="status" value="0" v-model.trim="user.status"/> 禁用
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="status" value="1" v-model.trim="user.status"/> 正常
+                </label>
+            </div>
+            <div class="form-group">
                 <div class="col-sm-2 control-label"></div>
                 <input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
                 &nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
@@ -51,7 +104,10 @@
         </form>
     </div>
 </div>
-
+<!-- 选择机构 -->
+<!--<div id="deptLayer" style="display: none;padding:10px;">-->
+<!--    <ul id="deptTree" class="ztree"></ul>-->
+<!--</div>-->
 <script src="/statics/js/modules/sys/user.js"></script>
 </body>
 </html>

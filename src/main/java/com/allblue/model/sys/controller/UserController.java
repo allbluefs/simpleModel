@@ -8,6 +8,7 @@ import com.allblue.model.sys.service.UserService;
 
 import com.allblue.model.utils.PageUtils;
 import com.allblue.model.utils.R;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,21 +42,27 @@ public class UserController {
 
 
     /**
-     * 信息
+     * 用户信息
      */
-    @RequestMapping("/info/{id}")
-    public R info(@PathVariable("id") Long id){
-        UserEntity tUser = userService.selectById(id);
-
-        return R.ok().put("tUser", tUser);
+    @RequestMapping("/info/{userId}")
+    public R info(@PathVariable("userId") Long userId){
+        UserEntity user = userService.selectById(userId);
+        return R.ok().put("user", user);
     }
 
     /**
      * 保存
      */
     @RequestMapping("/save")
-    public R save(@RequestBody UserEntity tUser){
-        userService.insert(tUser);
+    public R save(@RequestBody UserEntity user){
+        if(user.getPassword().length()<6){
+            return R.error("密码至少6位");
+        }
+        /*if(user.getPartysName()==null){
+            user.setPartysName(null);
+        }*/
+        userService.save(user);
+
         return R.ok();
     }
 
@@ -63,9 +70,8 @@ public class UserController {
      * 修改
      */
     @RequestMapping("/update")
-    public R update(@RequestBody UserEntity tUser){
-        userService.updateAllColumnById(tUser);//全部更新
-        
+    public R update(@RequestBody UserEntity user){
+        userService.update(user);
         return R.ok();
     }
 
@@ -77,6 +83,25 @@ public class UserController {
         userService.deleteBatchIds(Arrays.asList(ids));
 
         return R.ok();
+    }
+    /**
+     * 用户名检测
+     */
+    @RequestMapping("/detect")
+    public R detect(UserEntity user){
+        if (user.getUserId() == null) {
+            int count = userService.selectCount(new EntityWrapper<UserEntity>().eq("username", user.getUsername()));
+            if (count > 0) {
+                return R.ok().put("valid", false);
+            }
+        } else {
+            int count = userService.selectCount(new EntityWrapper<UserEntity>().eq("username", user.getUsername()).ne("user_id", user.getUserId()));
+            if (count > 0) {
+                return R.ok().put("valid", false);
+            }
+        }
+
+        return R.ok().put("valid", true);
     }
 
 }
