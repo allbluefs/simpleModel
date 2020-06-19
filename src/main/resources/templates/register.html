@@ -72,7 +72,7 @@
     <div class="row">
         <div class="col-md-12">
 <!--             <h4 class="text-center animated bounceInDown">学生选课管理系统</h4> bounceInDown动画效果-->
-            <h4 class="text-center animated">管理系统</h4>
+            <h4 class="text-center animated">用户注册</h4>
 
 
         </div>
@@ -80,7 +80,7 @@
             <div class="row login-plane animated fadeIn">
                 <div class="col-md-4 center-block">
                     <form method="post" name="login" id="login" action="">
-                        <strong>账号信息</strong>
+                        <strong>账号注册信息</strong>
                         <div class="form-group has-feedback">
                             <input name="" type="text" id="username" value=""
                                    placeholder="username" class="form-control"
@@ -98,55 +98,18 @@
                                    maxlength="16"/> <span class="form-control-feedback fui-lock"></span><span id="msg2" style="color: red"></span>
                         </div>
 
-<!--                        <div class="row">-->
-<!--                            <div class="col-md-12">-->
-<!--                                <strong>角色信息</strong>-->
-<!--                            </div>-->
-<!--                            <div class="col-md-4">-->
-<!--                                <label class="radio" for="radio1"> <input type="radio"-->
-<!--                                                                          name="optionsRadios1" value="student"-->
-<!--                                                                          checked="checked"-->
-<!--                                                                          id="radio1" data-toggle="radio"-->
-<!--                                                                          class="custom-radio">-->
-<!--                                    <span class="icons"> <span class="icon-unchecked"></span>-->
-<!--											<span class="icon-checked"></span>-->
-<!--									</span> <font style="vertical-align: inherit;"> <font-->
-<!--                                            style="vertical-align: inherit;"> 学生 </font>-->
-<!--                                    </font>-->
-<!--                                </label>-->
-<!--                            </div>-->
-<!--                            <div class="col-md-4">-->
-<!--                                <label class="radio" for="radio2"> <input type="radio"-->
-<!--                                                                          name="optionsRadios1" value="teacher"-->
-<!--                                                                          id="radio2"-->
-<!--                                                                          data-toggle="radio" class="custom-radio">-->
-<!--                                    <span-->
-<!--                                            class="icons"> <span class="icon-unchecked"></span> <span-->
-<!--                                            class="icon-checked"></span>-->
-<!--									</span> <font style="vertical-align: inherit;"> <font-->
-<!--                                            style="vertical-align: inherit;"> 老师 </font>-->
-<!--                                    </font>-->
-<!--                                </label>-->
-<!--                            </div>-->
-<!--                            <div class="col-md-4">-->
-<!--                                <label class="radio" for="radio3"> <input type="radio"-->
-<!--                                                                          name="optionsRadios1" value="admin"-->
-<!--                                                                          id="radio3"-->
-<!--                                                                          data-toggle="radio" class="custom-radio">-->
-<!--                                    <span-->
-<!--                                            class="icons"> <span class="icon-unchecked"></span> <span-->
-<!--                                            class="icon-checked"></span>-->
-<!--									</span> <font style="vertical-align: inherit;"> <font-->
-<!--                                            style="vertical-align: inherit;"> 管理员 </font>-->
-<!--                                    </font>-->
-<!--                                </label>-->
-<!--                            </div>-->
-<!--                        </div>-->
+                        <div class="form-group has-feedback">
+                            <input name="" type="text" value="" id="chineseName"
+                                   placeholder="chineseName" class="form-control"
+                                   autocomplete="off"
+                                   onkeyup="this.value=this.value.replace(/(^\s+)|(\s+$)/g,'');"
+                                   maxlength="16"/> <span class="form-control-feedback fui-new"></span>
+                        </div>
 
-                        <input class="btn btn-primary btn-wide login-btn" value="LOGIN"
-                               type="button" onclick="userLogin()"/>
                         <input class="btn btn-primary btn-wide login-btn" value="REGISTER"
-                               type="button" onclick="toRegister()"/>
+                               type="button" onclick="userRegister()"/>
+                        <input class="btn btn-primary btn-wide login-btn" value="CANCEL"
+                               type="button" onclick="backToLogin()"/>
                     </form>
                 </div>
             </div>
@@ -154,9 +117,10 @@
     </div>
 </div>
 <script>
-    function userLogin() {
+    function userRegister() {
         let username=$("#username").val().trim();
         let password=$("#password").val().trim();
+        let chineseName=$("#chineseName").val().trim();
         if (username==null||username==''){
             $("#msg1").html("用户名不能为空");
             return;
@@ -165,25 +129,27 @@
             $("#msg2").html("密码不能为空");
             return;
         };
+
         var obj=new Object();
         obj.username=username;
         obj.password=password;
+        obj.chineseName=chineseName;
         $.ajax({
             type: "POST",
-            url: "login",
+            url: "register",
             data: obj,
             contentType: "application/x-www-form-urlencoded; charset=UTF-8",
             success: function (result) {
-                if (result.code == 0) {//登录成功
-                    location.href="index.html";
+                if (result.code == 0) {//注册成功
+                    location.href="/login.html";
                 } else {
                     alert(result.msg);
                 }
             }
         });
     }
-    function toRegister() {
-        location.href="register.html";
+    function backToLogin() {
+        location.href="/login.html";
     }
     function clearMsg1() {
         $("#msg1").html("");
@@ -191,6 +157,7 @@
     function clearMsg2() {
         $("#msg2").html("");
     }
+
 </script>
 </body>
 </html>

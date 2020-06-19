@@ -41,13 +41,26 @@ public class LoginController {
             return R.ok("登录成功");
 
     }
+    @RequestMapping("/register")
+    @ResponseBody
+    public R register(UserEntity user, HttpServletRequest request) {
+        UserEntity userDB = userService.selectOne(new EntityWrapper<UserEntity>().eq("username", user.getUsername()));
+        if (userDB!=null){
+            return R.error("用户名已存在");
+        }
+        user.setRoleId(2l);
+        user.setUserType(1);
+        userService.save(user);
+        return R.ok("注册成功");
+
+    }
     /**
      * 退出登陆
      *
      * @param request
      * @return
      */
-    @RequestMapping("/loginOut")
+    @RequestMapping("sys/logout")
     public String login(HttpServletRequest request, HttpServletResponse response) {
         request.getSession().removeAttribute("user");
         return "login";

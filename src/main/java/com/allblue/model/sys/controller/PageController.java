@@ -22,6 +22,10 @@ public class PageController {
     public Object index() {
         return "index";
     }
+    @RequestMapping("register.html")
+    public Object register() {
+        return "register";
+    }
     @RequestMapping("main.html")
     public String main() {
         return "main";

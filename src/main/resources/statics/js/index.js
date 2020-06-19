@@ -73,7 +73,7 @@ var vm = new Vue({
         },
         logout:function(){
             $.get("sys/logout",function (r) {
-                window.location.href="/api/login.html"
+                window.location.href="login.html"
             })
         },
         updatePassword: function () {
