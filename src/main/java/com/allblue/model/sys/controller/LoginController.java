@@ -51,6 +51,7 @@ public class LoginController {
         }
         user.setRoleId(2l);
         user.setUserType(1);
+        user.setStatus(1);
         user.setCreateTime(new Date());
         userService.save(user);
         return R.ok("注册成功");
