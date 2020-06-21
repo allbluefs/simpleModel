@@ -105,6 +105,31 @@
                                    onkeyup="this.value=this.value.replace(/(^\s+)|(\s+$)/g,'');"
                                    maxlength="16"/> <span class="form-control-feedback fui-new"></span>
                         </div>
+                        <div class="form-group has-feedback">
+                            <input name="" type="text" value="" id="phoneNumber"
+                                   placeholder="phoneNumber" class="form-control"
+                                   autocomplete="off"
+                                   maxlength="16"/> <span class="form-control-feedback fui-new"></span>
+                        </div>
+                        <div class="form-group has-feedback">
+                            <input name="" type="text" value="" id="email"
+                                   placeholder="email" class="form-control"
+                                   autocomplete="off"
+                                   maxlength="16"/> <span class="form-control-feedback fui-new"></span>
+                        </div>
+                        <div class="form-group has-feedback">
+                            <input name="" type="text" value="" id="idCardNumber"
+                                   placeholder="idCardNumber" class="form-control"
+                                   autocomplete="off"
+                                   maxlength="16"/> <span class="form-control-feedback fui-new"></span>
+                        </div>
+                        <div class="form-group has-feedback">
+                            <input name="" type="text" value="" id="qq"
+                                   placeholder="qq" class="form-control"
+                                   autocomplete="off"
+                                   maxlength="16"/> <span class="form-control-feedback fui-new"></span>
+                        </div>
+
 
                         <input class="btn btn-primary btn-wide login-btn" value="REGISTER"
                                type="button" onclick="userRegister()"/>
@@ -121,6 +146,10 @@
         let username=$("#username").val().trim();
         let password=$("#password").val().trim();
         let chineseName=$("#chineseName").val().trim();
+        let phoneNumber=$("#phoneNumber").val().trim();
+        let email=$("#email").val().trim();
+        let qq=$("#qq").val().trim();
+        let idCardNumber=$("#idCardNumber").val().trim();
         if (username==null||username==''){
             $("#msg1").html("用户名不能为空");
             return;
@@ -133,7 +162,10 @@
         var obj=new Object();
         obj.username=username;
         obj.password=password;
-        obj.chineseName=chineseName;
+        obj.phoneNumber=phoneNumber;
+        obj.email=email;
+        obj.qq=qq;
+        obj.idCardNumber=idCardNumber;
         $.ajax({
             type: "POST",
             url: "register",

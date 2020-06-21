@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 
 /**
  @Date:2020/6/16
@@ -50,6 +51,7 @@ public class LoginController {
         }
         user.setRoleId(2l);
         user.setUserType(1);
+        user.setCreateTime(new Date());
         userService.save(user);
         return R.ok("注册成功");
 
