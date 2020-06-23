@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.allblue.model.sys.dao.MenuDao">
+<mapper namespace="com.allblue.sys.dao.MenuDao">
 
 	<!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="com.allblue.model.sys.entity.MenuEntity" id="menuMap">
+    <resultMap type="com.allblue.sys.entity.MenuEntity" id="menuMap">
         <result property="menuId" column="menu_id"/>
         <result property="parentId" column="parent_id"/>
         <result property="name" column="name"/>
@@ -14,7 +14,7 @@
         <result property="icon" column="icon"/>
         <result property="orderNum" column="order_num"/>
     </resultMap>
-    <select id="queryListParentId" resultType="com.allblue.model.sys.entity.MenuEntity">
+    <select id="queryListParentId" resultType="com.allblue.sys.entity.MenuEntity">
         select * from sys_menu where parent_id = #{parentId} order by order_num asc
     </select>
 
