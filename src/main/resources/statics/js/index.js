@@ -134,6 +134,7 @@ function routerList(router, menuList) {
 
                 //导航菜单展开
                 $(".treeview-menu li").removeClass("active");
+                $(".sidebar-menu li").removeClass("active");
                 $("a[href='" + url + "']").parents("li").addClass("active");
                 console.log("运行到这里了");
                 // if(vm.navTitles.length>0){
